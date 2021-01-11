@@ -96,73 +96,73 @@ a = C.Coordinates("a")
 a.set_cartesian(0, 0, D.Decimal(Z1_mm))
 a.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(a)
+gs.add_vertex(a)
 
 b = C.Coordinates("b")
 b.set_cartesian(0, CF.R_mm, Z2_mm)
 b.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(b)
+gs.add_vertex(b)
 
 c = C.Coordinates("c")
 c.set_cartesian(Cx_mm, Cy_mm, Z2_mm)
 c.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(c)
+gs.add_vertex(c)
 
 d = C.Coordinates("d")
 d.set_cartesian(S_mm / 2, -H_mm, Z2_mm)
 d.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(d)
+gs.add_vertex(d)
 
 e = C.Coordinates("e")
 e.set_cartesian(-S_mm / 2, -H_mm, Z2_mm)
 e.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(e)
+gs.add_vertex(e)
 
 f = C.Coordinates("f")
 f.set_cartesian(-Cx_mm, Cy_mm, Z2_mm)
 f.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(f)
+gs.add_vertex(f)
 
 g = C.Coordinates("g")
 g.set_cartesian(0, -CF.R_mm, -Z2_mm)
 g.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(g)
+gs.add_vertex(g)
 
 h = C.Coordinates("h")
 h.set_cartesian(-Cx_mm, -Cy_mm, -Z2_mm)
 h.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(h)
+gs.add_vertex(h)
 
 i = C.Coordinates("i")
 i.set_cartesian(-S_mm / 2, H_mm, -Z2_mm)
 i.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(i)
+gs.add_vertex(i)
 
 j = C.Coordinates("j")
 j.set_cartesian(S_mm / 2, H_mm, -Z2_mm)
 j.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(j)
+gs.add_vertex(j)
 
 k = C.Coordinates("k")
 k.set_cartesian(Cx_mm, -Cy_mm, -Z2_mm)
 k.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(k)
+gs.add_vertex(k)
 
 l = C.Coordinates("l")
 l.set_cartesian(0, 0, -Z1_mm)
 l.set_point_number(CF.nPoint)
 CF.nPoint += 1
-gs.Add_Vertex(l)
+gs.add_vertex(l)
 
 
 #---------------------------------------------
@@ -176,33 +176,33 @@ gs.Add_Vertex(l)
 
 # Top 5 faces
 
-gs.Add_Face( a, b, c )
-gs.Add_Face( a, c, d )
-gs.Add_Face( a, d, e )
-gs.Add_Face( a, e, f )
-gs.Add_Face( a, f, b )
+gs.add_face(a, b, c)
+gs.add_face(a, c, d)
+gs.add_face(a, d, e)
+gs.add_face(a, e, f)
+gs.add_face(a, f, b)
 
 # Middle faces
 
-gs.Add_Face( j, k, c )
-gs.Add_Face( k, d, g )
-gs.Add_Face( g, e, h )
-gs.Add_Face( h, f, i )
-gs.Add_Face( i, b, j )
+gs.add_face(j, k, c)
+gs.add_face(k, d, g)
+gs.add_face(g, e, h)
+gs.add_face(h, f, i)
+gs.add_face(i, b, j)
 
-gs.Add_Face( c, k, d )
-gs.Add_Face( d, g, e )
-gs.Add_Face( e, h, f )
-gs.Add_Face( f, i, b )
-gs.Add_Face( b, j, c )
+gs.add_face(c, k, d)
+gs.add_face(d, g, e)
+gs.add_face(e, h, f)
+gs.add_face(f, i, b)
+gs.add_face(b, j, c)
 
 
 # Bottom faces
-gs.Add_Face( l, k, j )
-gs.Add_Face( l, j, i )
-gs.Add_Face( l, i, h )
-gs.Add_Face( l, h, g )
-gs.Add_Face( l, g, k )
+gs.add_face(l, k, j)
+gs.add_face(l, j, i)
+gs.add_face(l, i, h)
+gs.add_face(l, h, g)
+gs.add_face(l, g, k)
 
 
 
@@ -211,19 +211,19 @@ gs.Add_Face( l, g, k )
 
 
 # Once all faces added, derive list of unique points
-gs.Point_List_From_Edges()
+gs.point_list_from_edges()
 
 # Create the list of edges with the new numbered and unique points
-gs.Create_New_Edges()
+gs.create_new_edges()
 
 # Remove duplicate edges as faces joining up will have the same edge
-gs.Remove_Duplicate_Edges()
+gs.remove_duplicate_edges()
 
 # Set all the points to have the same radius
 #gs.Set_Edges_Pt_Radius( CF.R_mm )
 
 # For each point find the edges which meet there
-gs.Hub_List_From_Edges()
+gs.hub_list_from_edges()
 
 #---------------------------------
 # Print Results
@@ -265,11 +265,11 @@ print ("Number of points: ", len(gs.Point_Hash.keys()))
 print ("Number of edges: ", len(gs.Temp_Edge_List))
 
 # Print the count of the hubs
-gs.Count_Point_Intersections()
+gs.count_point_intersections()
 
 
 # Print the count of edge lengths
-gs.Count_Edge_Lengths()
+gs.count_edge_lengths()
 
 print ("\nNumber of Edge Lengths: ", len(gs.Edge_Count))
 
