@@ -64,7 +64,7 @@ class Edge:
         node_number_two = node_number_two[node_number_two.find('t') + 1:]
 
         #print(node_number_two)
-        return (self.x1.Get_Point_Number(), self.x2.Get_Point_Number())
+        return (self.x1.get_point_number(), self.x2.get_point_number())
 
     def Get_Node_1(self):
         return str(self.x1)

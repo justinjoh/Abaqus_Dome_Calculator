@@ -44,7 +44,7 @@ class GeoSphere:
 
     def Print_Points_CATIA(self):
         for x in self.Point_List:
-            print (x.Get_CATIA_Desc())
+            print (x.get_CATIA_desc())
 
 
     def Print_Vertices(self):
@@ -75,12 +75,12 @@ class GeoSphere:
     def Set_Edges_Pt_Radius(self, rad_mm):
         # Must also set the radius for the edge list??
         for x in self.Vertex_List:
-            x.Set_Radius(rad_mm)
+            x.set_radius(rad_mm)
 
         # Update both points in an edge
         for x in self.Edge_List:
-            x.x1.Set_Radius(rad_mm)
-            x.x2.Set_Radius(rad_mm)
+            x.x1.set_radius(rad_mm)
+            x.x2.set_radius(rad_mm)
 
     def Add_Face( self, a, b, c):
 
@@ -278,7 +278,7 @@ class GeoSphere:
             for e in self.Updated_Edge_List:
                 if e.x1 == pt or e.x2 == pt:
                     # Add edge to the point list.
-                    pt.Add_Edge(e)
+                    pt.add_edge(e)
 
 
 

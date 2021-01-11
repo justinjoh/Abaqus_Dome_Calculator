@@ -102,74 +102,74 @@ gs = G.GeoSphere("Sphere", CF.frequency_n, CF.R_mm);
 
 # Icosahedron vertice coordinates
 a = C.Coordinates("a")
-a.Set_Cartesian(0, 0, D.Decimal(Z1_mm))
-a.Set_Point_Number(CF.nPoint)
+a.set_cartesian(0, 0, D.Decimal(Z1_mm))
+a.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(a)
 
 b = C.Coordinates("b")
-b.Set_Cartesian(0, CF.R_mm, Z2_mm)
-b.Set_Point_Number(CF.nPoint)
+b.set_cartesian(0, CF.R_mm, Z2_mm)
+b.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(b)
 
 c = C.Coordinates("c")
-c.Set_Cartesian(Cx_mm, Cy_mm, Z2_mm)
-c.Set_Point_Number(CF.nPoint)
+c.set_cartesian(Cx_mm, Cy_mm, Z2_mm)
+c.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(c)
 
 d = C.Coordinates("d")
-d.Set_Cartesian(S_mm / 2, -H_mm, Z2_mm)
-d.Set_Point_Number(CF.nPoint)
+d.set_cartesian(S_mm / 2, -H_mm, Z2_mm)
+d.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(d)
 
 e = C.Coordinates("e")
-e.Set_Cartesian(-S_mm / 2, -H_mm, Z2_mm)
-e.Set_Point_Number(CF.nPoint)
+e.set_cartesian(-S_mm / 2, -H_mm, Z2_mm)
+e.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(e)
 
 f = C.Coordinates("f")
-f.Set_Cartesian(-Cx_mm, Cy_mm, Z2_mm)
-f.Set_Point_Number(CF.nPoint)
+f.set_cartesian(-Cx_mm, Cy_mm, Z2_mm)
+f.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(f)
 
 g = C.Coordinates("g")
-g.Set_Cartesian(0, -CF.R_mm, -Z2_mm)
-g.Set_Point_Number(CF.nPoint)
+g.set_cartesian(0, -CF.R_mm, -Z2_mm)
+g.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(g)
 
 h = C.Coordinates("h")
-h.Set_Cartesian(-Cx_mm, -Cy_mm, -Z2_mm)
-h.Set_Point_Number(CF.nPoint)
+h.set_cartesian(-Cx_mm, -Cy_mm, -Z2_mm)
+h.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(h)
 
 i = C.Coordinates("i")
-i.Set_Cartesian(-S_mm / 2, H_mm, -Z2_mm)
-i.Set_Point_Number(CF.nPoint)
+i.set_cartesian(-S_mm / 2, H_mm, -Z2_mm)
+i.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(i)
 
 j = C.Coordinates("j")
-j.Set_Cartesian(S_mm / 2, H_mm, -Z2_mm)
-j.Set_Point_Number(CF.nPoint)
+j.set_cartesian(S_mm / 2, H_mm, -Z2_mm)
+j.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(j)
 
 k = C.Coordinates("k")
-k.Set_Cartesian(Cx_mm, -Cy_mm, -Z2_mm)
-k.Set_Point_Number(CF.nPoint)
+k.set_cartesian(Cx_mm, -Cy_mm, -Z2_mm)
+k.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(k)
 
 l = C.Coordinates("l")
-l.Set_Cartesian(0, 0, -Z1_mm)
-l.Set_Point_Number(CF.nPoint)
+l.set_cartesian(0, 0, -Z1_mm)
+l.set_point_number(CF.nPoint)
 CF.nPoint += 1
 gs.Add_Vertex(l)
 
@@ -239,7 +239,7 @@ gs.Hub_List_From_Edges()
 
 unsorted_points = []
 for p in (gs.Point_Hash.keys()):
-    points_string = p.Get_Cartesian_Coordinates()
+    points_string = p.get_cartesian_coordinates()
     points_tuple = points_string[points_string.find('(') + 1 : points_string.find(')')]
     points_tuple = points_tuple.split(',')
     new_tuple = []
@@ -386,3 +386,10 @@ print("Member Count: " + str(len(edge_number_list) + 1))
 print("Average Member Length: " + str(total_beam / (len(edge_number_list) + 1)))
 print("Bar Length Standard Deviation: " + str(std_dev))
 print("Percent Deviation: " + str(round(100 * std_dev / (total_beam / (len(edge_number_list) + 1)), 2)), '%')
+
+# quick test for defaults
+if True:
+    assert(round(total_beam, 3) == 76.054)
+    assert(len(edge_number_list) == 65)
+    assert(round(total_beam / (len(edge_number_list) + 1), 3) == 1.152)
+    assert(round(std_dev, 3) == 0.071)

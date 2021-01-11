@@ -59,26 +59,26 @@ class IcoFace:
                 # Can remove any vertices from the list if we want, although all the same
 
                 a = C.Coordinates("pointA")
-                a.Set_Point_Number(CF.nPoint)
+                a.set_point_number(CF.nPoint)
                 CF.nPoint += 1
                 b = C.Coordinates("pointB")
-                b.Set_Point_Number(CF.nPoint)
+                b.set_point_number(CF.nPoint)
                 CF.nPoint += 1
                 c = C.Coordinates("pointC")
-                c.Set_Point_Number(CF.nPoint)
+                c.set_point_number(CF.nPoint)
                 CF.nPoint += 1
 
                 # r, theta, phi
 				
                 # Calculate the new coordinates based on the offset from the initial point (A)
-                a.Set_Polar( x0.r, x0.theta + j*delta_theta_x1x2 + i*delta_theta_x1x3, x0.phi + j*delta_phi_x1x2 + i*delta_phi_x1x3)
+                a.set_polar(x0.r, x0.theta + j * delta_theta_x1x2 + i * delta_theta_x1x3, x0.phi + j * delta_phi_x1x2 + i * delta_phi_x1x3)
 
                 #a.Set_Polar( x0 + i*delta_x1x2.x + j*delta_x1x3.x, y0 + i*delta_x1x2.y + j*delta_x1x3.y, z0 + i*delta_x1x2.z + j*delta_x1x3.z)
 
-                b.Set_Polar( x0.r, x0.theta + (j-1)*delta_theta_x1x2 + i*delta_theta_x1x3, x0.phi + (j-1)*delta_phi_x1x2 + i*delta_phi_x1x3)
+                b.set_polar(x0.r, x0.theta + (j - 1) * delta_theta_x1x2 + i * delta_theta_x1x3, x0.phi + (j - 1) * delta_phi_x1x2 + i * delta_phi_x1x3)
                 #b.Set_Polar( x0 + i*delta_x1x2.x + (j-1)*delta_x1x3.x, y0 + i*delta_x1x2.y + (j-1)*delta_x1x3.y, z0 + i*delta_x1x2.z + (j-1)*delta_x1x3.z)
 
-                c.Set_Polar( x0.r, x0.theta + (j-1)*delta_theta_x1x2 + (i+1)*delta_theta_x1x3, x0.phi + (j-1)*delta_phi_x1x2 + (i+1)*delta_phi_x1x3)
+                c.set_polar(x0.r, x0.theta + (j - 1) * delta_theta_x1x2 + (i + 1) * delta_theta_x1x3, x0.phi + (j - 1) * delta_phi_x1x2 + (i + 1) * delta_phi_x1x3)
                 #c.Set_Polar( x0 + (i+1)*delta_x1x2.x + (j-1)*delta_x1x3.x, y0 + (i+1)*delta_x1x2.y + (j-1)*delta_x1x3.y, z0 + (i+1)*delta_x1x2.z + (j-1)*delta_x1x3.z)
 						
 
@@ -130,23 +130,23 @@ class IcoFace:
                 # Can remove any vertices from the list if we want, although all the same
 
                 a = C.Coordinates("pointA")
-                a.Set_Point_Number(CF.nPoint)
+                a.set_point_number(CF.nPoint)
                 CF.nPoint += 1
                 b = C.Coordinates("pointB")
-                b.Set_Point_Number(CF.nPoint)
+                b.set_point_number(CF.nPoint)
                 CF.nPoint += 1
                 c = C.Coordinates("pointC")
-                c.Set_Point_Number(CF.nPoint)
+                c.set_point_number(CF.nPoint)
                 CF.nPoint += 1
 				
 				
 
                 # Calculate the new coordinates based on the offset from the initial point (A)
-                a.Set_Cartesian( x0 + i*delta_x1x2.x + j*delta_x1x3.x, y0 + i*delta_x1x2.y + j*delta_x1x3.y, z0 + i*delta_x1x2.z + j*delta_x1x3.z)
+                a.set_cartesian(x0 + i * delta_x1x2.x + j * delta_x1x3.x, y0 + i * delta_x1x2.y + j * delta_x1x3.y, z0 + i * delta_x1x2.z + j * delta_x1x3.z)
 
-                b.Set_Cartesian( x0 + i*delta_x1x2.x + (j-1)*delta_x1x3.x, y0 + i*delta_x1x2.y + (j-1)*delta_x1x3.y, z0 + i*delta_x1x2.z + (j-1)*delta_x1x3.z)
+                b.set_cartesian(x0 + i * delta_x1x2.x + (j - 1) * delta_x1x3.x, y0 + i * delta_x1x2.y + (j - 1) * delta_x1x3.y, z0 + i * delta_x1x2.z + (j - 1) * delta_x1x3.z)
 
-                c.Set_Cartesian( x0 + (i+1)*delta_x1x2.x + (j-1)*delta_x1x3.x, y0 + (i+1)*delta_x1x2.y + (j-1)*delta_x1x3.y, z0 + (i+1)*delta_x1x2.z + (j-1)*delta_x1x3.z)
+                c.set_cartesian(x0 + (i + 1) * delta_x1x2.x + (j - 1) * delta_x1x3.x, y0 + (i + 1) * delta_x1x2.y + (j - 1) * delta_x1x3.y, z0 + (i + 1) * delta_x1x2.z + (j - 1) * delta_x1x3.z)
 				
 				
 
@@ -178,7 +178,7 @@ class IcoFace:
     def Get_Delta_Vector(self, a, b ):
         # Return the delta vector
         del_vec = C.Coordinates("Delta_" + a.name + b.name)
-        del_vec.Set_Cartesian( (b.x - a.x)/self.freq_n , (b.y - a.y)/self.freq_n, (b.z - a.z)/self.freq_n )
+        del_vec.set_cartesian((b.x - a.x) / self.freq_n, (b.y - a.y) / self.freq_n, (b.z - a.z) / self.freq_n)
 
         return del_vec
 

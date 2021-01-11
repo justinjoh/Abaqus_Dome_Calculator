@@ -10,8 +10,10 @@ import sys
 import ctypes
 import numpy as np
 
+
 def cart2sp(x, y, z):
-    """Converts data from cartesian coordinates into spherical.
+    """
+    Converts data from cartesian coordinates into spherical.
 
     Args:
         x (scalar or array_like): X-component of data.
@@ -34,11 +36,13 @@ def cart2sp(x, y, z):
     theta = np.arcsin(z/r)
     phi = np.arctan2(y, x)
     if scalar_input:
-        return (r.squeeze(), theta.squeeze(), phi.squeeze())
-    return (r, theta, phi)
+        return r.squeeze(), theta.squeeze(), phi.squeeze()
+    return r, theta, phi
+
 
 def sp2cart(r, theta, phi):
-    """Converts data in spherical coordinates into cartesian.
+    """
+    Converts data in spherical coordinates into cartesian.
 
     Args:
         r (scalar or array_like): R-component of data.
@@ -61,11 +65,13 @@ def sp2cart(r, theta, phi):
     y = r*np.cos(theta)*np.sin(phi)
     z = r*np.sin(theta)
     if scalar_input:
-        return (x.squeeze(), y.squeeze(), z.squeeze())
-    return (x, y, z)
+        return x.squeeze(), y.squeeze(), z.squeeze()
+    return x, y, z
+
 
 def cart2cyl(x, y, z):
-    """Converts data in cartesian coordinates into cylyndrical.
+    """
+    Converts data in cartesian coordinates into cylyndrical.
 
     Args:
         x (scalar or array_like): X-component of data.
@@ -87,8 +93,9 @@ def cart2cyl(x, y, z):
     r = np.sqrt(x**2+y**2)
     phi = np.arctan2(y, x)
     if scalar_input:
-        return (r.squeeze(), phi.squeeze(), z.squeeze())
-    return (r, phi, z)
+        return r.squeeze(), phi.squeeze(), z.squeeze()
+    return r, phi, z
+
 
 def cyl2cart(r, phi, z):
     """Converts data in cylindrical coordinates into cartesian.
@@ -113,11 +120,13 @@ def cyl2cart(r, phi, z):
     x = r*np.cos(phi)
     y = r*np.sin(phi)
     if scalar_input:
-        return (x.squeeze(), y.squeeze(), z.squeeze())
-    return (x, y, z)
+        return x.squeeze(), y.squeeze(), z.squeeze()
+    return x, y, z
+
 
 def mx_rot_x(gamma):
-    """Returns rotational matrix for right-handed rotation
+    """
+    Returns rotational matrix for right-handed rotation
     around X axis.
 
     Args:
@@ -132,8 +141,10 @@ def mx_rot_x(gamma):
         [0, np.sin(gamma), np.cos(gamma)]
     ])
 
+
 def mx_rot_y(theta):
-    """Returns rotational matrix for right-handed rotation
+    """
+    Returns rotational matrix for right-handed rotation
     around Y axis.
 
     Args:
@@ -148,8 +159,10 @@ def mx_rot_y(theta):
         [-np.sin(theta), 0, np.cos(theta)]
     ])
 
+
 def mx_rot_z(phi):
-    """Returns rotational matrix for right-handed rotation
+    """
+    Returns rotational matrix for right-handed rotation
     around Z axis.
 
     Args:
@@ -164,8 +177,10 @@ def mx_rot_z(phi):
         [0, 0, 1]
     ])
 
+
 def mx_rot(theta, phi, gamma):
-    """Returns rotational matrix for compound rotation
+    """
+    Returns rotational matrix for compound rotation
     around X, Y and Z axes. The order of rotation is X-Y-Z.
 
     Args:
@@ -181,8 +196,10 @@ def mx_rot(theta, phi, gamma):
         np.dot(mx_rot_y(theta), mx_rot_x(gamma))
     )
 
+
 def mx_rot_reverse(theta, phi, gamma):
-    """Returns rotational matrix for compound rotations
+    """
+    Returns rotational matrix for compound rotations
     around X, Y and Z axes. The order of rotation is Z-Y-X.
 
     Args:
@@ -198,8 +215,10 @@ def mx_rot_reverse(theta, phi, gamma):
         np.dot(mx_rot_y(theta), mx_rot_z(phi))
     )
 
+
 def mx_apply(T, x, y, z):
-    """Applies rotation to data using rotational matrix.
+    """
+    Applies rotation to data using rotational matrix.
 
     Args:
         T (numpy.matrix): Rotational matrix.
@@ -223,11 +242,13 @@ def mx_apply(T, x, y, z):
     y_ = T[1, 0]*x+T[1, 1]*y+T[1, 2]*z
     z_ = T[2, 0]*x+T[2, 1]*y+T[2, 2]*z
     if scalar_input:
-        return (x_.squeeze(), y_.squeeze(), z_.squeeze())
-    return (x_, y_, z_)
+        return x_.squeeze(), y_.squeeze(), z_.squeeze()
+    return x_, y_, z_
+
 
 def cxform(cs_from, cs_to, dt, x, y, z):
-    """Performs conversion between various geocentric and heliocentric
+    """
+    Performs conversion between various geocentric and heliocentric
     coordinate systems.
 
     Args:
@@ -298,5 +319,5 @@ def cxform(cs_from, cs_to, dt, x, y, z):
         y_to.flat[i] = v_out[1]
         z_to.flat[i] = v_out[2]
     if scalar_input:
-        return (x_to.squeeze(), y_to.squeeze(), z_to.squeeze())
-    return (x_to, y_to, z_to)
+        return x_to.squeeze(), y_to.squeeze(), z_to.squeeze()
+    return x_to, y_to, z_to

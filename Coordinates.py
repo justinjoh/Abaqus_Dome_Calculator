@@ -4,6 +4,7 @@ import math as M
 from numbers import Number
 from decimal import Decimal
 
+
 class Coordinates(object):
     # Cartesian coordinates
     # x, y, z
@@ -12,18 +13,18 @@ class Coordinates(object):
     # int r, theta, phi
 
     # Tolerance for calculations
-    #TINY = Decimal(1e-4)
+    # TINY = Decimal(1e-4)
     TINY = Decimal('0.0001')
- 	
+
     def __init__(self, n):
 
-        self.x=Decimal(0)
-        self.y=Decimal(0)
-        self.z=Decimal(0)
+        self.x = Decimal(0)
+        self.y = Decimal(0)
+        self.z = Decimal(0)
 
-        self.r=Decimal(0)
-        self.theta=Decimal(0)
-        self.phi=Decimal(0)
+        self.r = Decimal(0)
+        self.theta = Decimal(0)
+        self.phi = Decimal(0)
 
         self.name = n
         self.point_number = 0
@@ -31,35 +32,33 @@ class Coordinates(object):
         # Track which edges it is part of for getting lengths and angles!!
         self.Edge_List = list()
         self.edge_count = 0
-    def Get_Point_Number(self):
-        return self.point_number
-        
-    def Set_Cartesian( self, a, b, c ):
+
+    def set_cartesian(self, a, b, c):
 
         nbrd = Decimal('1e-10')
 
-        #znew = Decimal(c)
+        # znew = Decimal(c)
 
         self.x = Decimal(a).quantize(nbrd).normalize()
         self.y = Decimal(b).quantize(nbrd).normalize()
-        
-        # This one is the issue. Data coming in is not a decimal???
-        #print ('Decimal z: %.2f' % c)
+
+        # TODO: This one is the issue. Data coming in is not a decimal?
+        # print ('Decimal z: %.2f' % c)
         self.z = Decimal(c).quantize(nbrd).normalize()
 
         # Ensure that the coordinates always match
         # by recalculating the polar coords from the cartesian
         
-        rtemp = M.sqrt( self.x * self.x + self.y * self.y + self.z * self.z )
-        self.r = Decimal( str( rtemp ) )
+        rtemp = M.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
+        self.r = Decimal(str(rtemp))
         
-        thetatemp = M.acos( self.z / self.r )
-        self.theta = Decimal( str(thetatemp) )
+        thetatemp = M.acos(self.z / self.r)
+        self.theta = Decimal(str(thetatemp))
         
-        phitemp = M.atan2( self.y , self.x )
-        self.phi = Decimal( str(phitemp) )
+        phitemp = M.atan2(self.y, self.x)
+        self.phi = Decimal(str(phitemp))
 
-    def Set_Radius( self, r):
+    def set_radius(self, r):
 
         self.r = r
 
@@ -75,12 +74,11 @@ class Coordinates(object):
         if (self.z > -self.TINY) and (self.z < self.TINY):
             self.z = 0
 
-    def Set_Polar( self, r, theta, phi):
+    def set_polar(self, r, theta, phi):
 
         self.r = r
         self.theta = theta
         self.phi = phi
-
 
         if (self.r > -self.TINY) and (self.r < self.TINY):
             self.r = 0
@@ -103,65 +101,62 @@ class Coordinates(object):
         if (self.z > -self.TINY) and (self.z < self.TINY):
             self.z = 0
 
+    def print_polar(self):
+        print(self.name, " = ( r=", self.r, ", theta=", self.theta, ", phi=", self.phi, ")")
 
-    def Print_Polar(self):
-
-        print (self.name," = ( r=",self.r,", theta=",self.theta,", phi=",self.phi,")")
-
-    def Get_Cartesian_Coordinates(self):
-
+    def get_cartesian_coordinates(self):
         desc = self.name + " = (" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ")"
-
         return desc
 
     def __add__(self, other):
 
         a = Coordinates("ans")
-        a.Set_Cartesian( self.x + other.x, self.y + other.y, self.z + other.z )      
+        a.set_cartesian(self.x + other.x, self.y + other.y, self.z + other.z)
         
         return a
-
 
     def __eq__(self, other):
 
         if isinstance(other, Coordinates):
 
             # Compare only to 5 decimal places.
-            if ( round( self.x, 5 ) == round( other.x, 5 )) and ( round( self.y, 5 ) == round( other.y, 5 )) and ( round( self.z, 5 ) == round( other.z, 5 )):
-                return True
-            else:
+            if not (round(self.x, 5) == round(other.x, 5)):
                 return False
+            if not (round(self.y, 5) == round(other.y, 5)):
+                return False
+            if not (round(self.z, 5) == round(other.z, 5)):
+                return False
+            return True
         return NotImplemented
-
 
     def __hash__(self):
 
-        return hash((self.x,self.y,self.z))
+        return hash((self.x, self.y, self.z))
 
     def __mul__(self, other):
 
-        #note that there are much better ways to write this
-        #code, here we're trying to write self-explanatory code
-        #instead of "good" code
+        # note that there are much better ways to write this
+        # code, here we're trying to write self-explanatory code
+        # instead of "good" code
 
         a = Coordinates("ans")
 
-        if isinstance(other,Number):
+        if isinstance(other, Number):
 
-            a.Set_Cartesian( self.x * other, self.y * other, self.z * other )
+            a.set_cartesian(self.x * other, self.y * other, self.z * other)
             
         else:
 
-            a.Set_Cartesian( self.x * other.x, self.y * other.y, self.z * other.z )      
+            a.set_cartesian(self.x * other.x, self.y * other.y, self.z * other.z)
         
         return a
     
-    def dot( self, other ):
+    def dot(self, other):
 
         # Vector dot product operator
-        return M.sqrt( self.x * other.x + self.y * other.y + self.z * other.z )    
+        return M.sqrt(self.x * other.x + self.y * other.y + self.z * other.z)
 
-    def cross( self, b):
+    def cross(self, b):
 
         # Not Implemented - here for completeness
         return Coordinates("ans")
@@ -170,7 +165,7 @@ class Coordinates(object):
 
         return self.name + " = [ " + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + "]"
 
-    def Get_CATIA_Desc(self):
+    def get_CATIA_desc(self):
 
         # Return the string of VB code for the creation of the CATIA point
 
@@ -180,19 +175,19 @@ class Coordinates(object):
 
         return self.cat_desc
 
-    def Get_Point_Number(self):
+    def get_point_number(self):
         return self.point_number
 
-    def Set_Point_Number(self, nbr):
+    def set_point_number(self, nbr):
 
         self.point_number = nbr
         self.name = "Pt" + str(nbr)
                                          
-    def Add_Edge(self, ed):
+    def add_edge(self, ed):
 
         self.Edge_List.append(ed)
 
-    def Print_Edges(self):
+    def print_edges(self):
 
         print ("\nPoint " + self.name + " Edge List:\n----------------------------------")
 
