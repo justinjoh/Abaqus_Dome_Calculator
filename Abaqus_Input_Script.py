@@ -4,8 +4,8 @@ from abaqusConstants import *
 nodes = []
 edges = []
 
-#Paste path to Nodes.txt here, make sure to use double slashes between folders
-with open('C:\\Users\\Christopher\\Desktop\\Geodesic Dome Calculator\\nodes.txt') as fp:
+nodes_fname = './Nodes.txt'
+with open(nodes_fname) as fp:
     line = fp.readline()
     count = 0
     while line:
@@ -15,14 +15,13 @@ with open('C:\\Users\\Christopher\\Desktop\\Geodesic Dome Calculator\\nodes.txt'
         nodes.append(xy)
         line = fp.readline()
 
-#Paste path to Edges.txt here, make sure to use double slashes between folders
-with open('C:\\Users\\Christopher\\Desktop\\Geodesic Dome Calculator\\Edges.txt') as fp:
+edges_fname = './Edges.txt'
+with open(edges_fname) as fp:
     line = fp.readline()
     count = 0
     while line:
         xy = line.split(' ')
         xy = (int(xy[0]), int(xy[1].rstrip('\n')))
-        #print(xy)
         edges.append(xy)
         line = fp.readline()
 
